@@ -1,0 +1,13 @@
+/* PROGRESS.JS */
+.progress-done {
+  height: 100%;
+  width: 0;
+  opacity: 0;
+  /* makes the progress bars grow on refresh */
+  transition: 1s ease;
+}
+
+/*ABOUT Opacity */
+.about-box {
+  opacity: 80;
+}

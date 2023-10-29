@@ -1,0 +1,6 @@
+.service-header-container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+    url(../../assets/services-header.avif);
+  background-position: center;
+  background-size: cover;
+}

@@ -1,0 +1,9 @@
+/* Header.js */
+.home-div-box {
+    background-image: linear-gradient(rgba(70, 161, 247, 0), rgba(0, 0, 0, 0)),
+        url(../assets/Home-bg-animate3.gif);
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+      overflow: hidden;
+  }

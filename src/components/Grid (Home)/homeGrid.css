@@ -1,0 +1,16 @@
+/*.home-grid-section {
+    background-image: linear-gradient(rgba(70, 161, 247, 0.527), rgba(0, 0, 0, 0.2)),
+      url(../../assets/home-grid-bg.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+  */
+
+  .home-header-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.795),rgba(7, 56, 102, 0.068) ),
+      url(../../assets/services-header.avif);
+    background-position: center;
+    background-size: cover;
+  }
+  
+  

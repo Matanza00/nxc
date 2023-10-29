@@ -1,0 +1,10 @@
+.one {
+  font-family: 'Courgette';
+  color: #3902ff;
+  font-weight: 600;
+}
+
+.one:hover {
+  color: #ffcc00;
+  transition: 0.3s;
+}
