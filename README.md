@@ -1,3 +1,13 @@
+## Made By Usman Nadeem
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+
+## Authors
+* Matanza 
+  - https://github.com/Matanza00
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
