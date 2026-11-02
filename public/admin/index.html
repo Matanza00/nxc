@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>NXCSOL dashboard</title>
+<style>
+:root { color-scheme: dark; --line: rgba(31, 143, 255, .22); --ink: #fff; --ink-2: #c6d0e2; --mute: #8a97b0; --blue: #1f8fff; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #000; color: var(--ink); font: 400 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; border-bottom: 1px solid var(--line); font-family: Consolas, ui-monospace, monospace; }
+main { max-width: 1240px; margin: 0 auto; padding: 20px; display: grid; gap: 28px; }
+h1 { margin: 0; font: 500 15px/1 Consolas, ui-monospace, monospace; } h2 { margin: 0 0 10px; font: 500 16px/1.3 Consolas, ui-monospace, monospace; }
+.nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.nums div { padding: 14px; border: 1px solid var(--line); border-radius: 4px; } .nums b { display: block; font: 500 30px/1.1 Consolas, ui-monospace, monospace; } .nums span { color: var(--ink-2); font-size: 14px; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { padding: 9px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(31, 143, 255, .12); } th { color: var(--mute); font-weight: 500; }
+button, select, input { font: inherit; color: inherit; background: #050a14; border: 1px solid var(--line); border-radius: 4px; padding: 8px 12px; }
+button { cursor: pointer; } button:hover { border-color: #5cbcff; } button.primary { background: #0b63e5; border-color: #0b63e5; color: #fff; }
+tbody button { padding: 4px 10px; }
+form { display: grid; gap: 12px; max-width: 360px; margin: 12vh auto; padding: 20px; } label { display: grid; gap: 6px; color: var(--ink-2); }
+#err { color: #ffb4a6; min-height: 1.4em; margin: 0; } .empty { color: var(--mute); padding: 14px; margin: 0; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; } .tools h2 { margin: 0 auto 0 0; }
+iframe { display: block; width: 100%; height: 72vh; border: 1px solid var(--line); border-radius: 4px; background: #000; } iframe.phone { width: 390px; max-width: 100%; }
+</style>
+</head>
+<body>
+<header><h1>nxcsol / dashboard</h1><button id="out" hidden type="button">Sign out</button></header>
+<form id="login"><h2>Sign in</h2><label>Password<input id="pw" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Sign in</button><p id="err" role="alert"></p></form>
+<main id="app" hidden>
+  <div class="nums" id="nums"></div>
+  <section id="heat" hidden><div class="tools"><h2 id="heatTitle">Heatmap</h2><select id="device" aria-label="Device"><option value="desk">Desktop</option><option value="phone">Phone</option></select><button id="closeHeat" type="button">Close</button></div><iframe id="frame" title="Page with its click heatmap"></iframe></section>
+  <section><h2>Pages, last 30 days</h2><div class="scroll" id="pages"></div></section>
+  <section><h2>Project briefs</h2><div class="scroll" id="leads"></div></section>
+  <section><h2>Agent chats</h2><div class="scroll" id="chats"></div></section>
+</main>
+<script>
+const $ = (s) => document.querySelector(s), esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const day = (d) => new Date(d).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+const table = (head, rows) => rows.length ? `<table><thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table>` : '<p class="empty">Nothing recorded yet.</p>';
+let token = sessionStorage.getItem("nxc-admin") || "", heatPath = "/";
+async function load() {
+  const r = await fetch("/api/admin", { headers: { Authorization: "Bearer " + token } }), d = await r.json();
+  if (!r.ok) { sessionStorage.removeItem("nxc-admin"); token = ""; $("#login").hidden = false; $("#app").hidden = true; $("#out").hidden = true; $("#err").textContent = d.error || "Sign-in failed."; return; }
+  sessionStorage.setItem("nxc-admin", token); $("#login").hidden = true; $("#app").hidden = false; $("#out").hidden = false;
+  const t = d.totals;
+  $("#nums").innerHTML = [[t.views, "page views, 30 days"], [t.clicks, "clicks, 30 days"], [t.leads, "project briefs"], [t.chats, "agent conversations"]].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
+  $("#pages").innerHTML = table(["Page", "Views", "Clicks", "Avg scroll", ""], d.pages.map((p) => `<tr><td>${esc(p.path)}</td><td>${p.views}</td><td>${p.clicks}</td><td>${p.depth}%</td><td><button type="button" data-heat="${esc(p.path)}">Heatmap</button></td></tr>`));
+  $("#leads").innerHTML = table(["When", "Name", "Company", "Email", "Brief"], d.leads.map((l) => `<tr><td>${esc(day(l.at))}</td><td>${esc(l.name)}</td><td>${esc(l.company)}</td><td><a href="mailto:${esc(l.email)}" style="color:#5cbcff">${esc(l.email)}</a></td><td style="white-space:pre-wrap">${esc(l.brief)}</td></tr>`));
+  $("#chats").innerHTML = table(["When", "Question", "Answer"], d.chats.map((c) => `<tr><td>${esc(day(c.at))}</td><td>${esc(c.question)}</td><td>${esc(c.answer)}</td></tr>`));
+}
+function showHeat() { const dev = $("#device").value; $("#heat").hidden = false; $("#heatTitle").textContent = "Heatmap: " + heatPath; $("#frame").className = dev === "phone" ? "phone" : ""; $("#frame").src = heatPath + "?hm=" + dev; }
+$("#login").addEventListener("submit", (e) => { e.preventDefault(); token = $("#pw").value; load(); });
+$("#out").addEventListener("click", () => { sessionStorage.removeItem("nxc-admin"); location.reload(); });
+$("#device").addEventListener("change", showHeat);
+$("#closeHeat").addEventListener("click", () => { $("#heat").hidden = true; $("#frame").removeAttribute("src"); });
+document.addEventListener("click", (e) => { const b = e.target.closest("[data-heat]"); if (b) { heatPath = b.dataset.heat; showHeat(); scrollTo({ top: 0 }); } });
+if (token) load();
+</script>
+</body>
+</html>

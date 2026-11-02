@@ -1,0 +1,34 @@
+# NXCSOL
+
+> Software development company in Kalispell, Montana building SaaS platforms, Three.js 3D websites, custom business software and iOS and Android apps.
+
+NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcsol.com, phone +1 (209) 807-4007, WhatsApp +1 (406) 300-5434. Founder: Usman Nadeem.
+
+## Services
+
+- [SaaS platforms](https://nxcsol.com/services/saas-development/): NXCSOL builds SaaS platforms and MVPs: sign-up, Stripe billing, role-based dashboards, admin panels and AI analytics on Next.js, Node.js and PostgreSQL.
+- [Three.js and 3D web](https://nxcsol.com/services/threejs-3d-web-development/): Three.js development services: 3D product viewers and configurators, scroll-driven film and WebGL particle scenes that still load fast on phones.
+- [Custom software](https://nxcsol.com/services/custom-software-development/): Custom software for operations: fleet and facility management systems, admin panels, CRMs and dashboards, built around how your business actually runs.
+- [Mobile apps](https://nxcsol.com/services/mobile-app-development/): iOS and Android app development with React Native and Expo: sign-in, payments, chat, maps and live tracking, plus the backend and App Store releases.
+- [Claude skills](https://nxcsol.com/services/claude-skills-development/): NXCSOL writes custom Claude Code skills and plugins around your team's process, with eval cases, versioned releases and clear limits on what each skill can do.
+- [3D rendering and Blender](https://nxcsol.com/services/3d-rendering-blender/): 3D rendering in Blender from NXCSOL: product stills and turntables, short animation, and optimised glTF models ready for Three.js websites.
+
+## Case studies
+
+- [The Derma Club Clinic Website and Online Booking](https://nxcsol.com/work/dermaclub/): A 31-page website rebrand for a Mississauga skin clinic, with 20 treatment pages, a 51-product shop and an online booking system built to replace Jane.
+- [Obyect AI Ad-Insights SaaS Platform](https://nxcsol.com/work/obyect/): How we built Obyect, a curated library of 2,400+ winning DTC ads with boards, creative requests, admin curation and analytics on React and Supabase.
+- [Dr Solar 3D Scroll Website and Shopify Theme](https://nxcsol.com/work/dr-solar/): A scroll-driven website for a solar installer: one house turns from day to night while the power runs through it, with a sizing calculator on a Shopify theme.
+- [Atomic Muscles 3D E-commerce Store (Three.js)](https://nxcsol.com/work/atomic-muscles/): Case study: a scroll-driven Three.js storefront for a supplement brand, with 3D product viewers, Shopify checkout and English and Urdu support.
+- [Fleet Management Software for 580+ Vehicles](https://nxcsol.com/work/fleet-management-system/): A custom fleet management system tracking 580+ vehicles across 12+ cities, with live tracking, fuel anomaly flags, maintenance and role-based access.
+- [iFund Real Estate Funding App (React Native)](https://nxcsol.com/work/ifund/): A two-sided iOS and Android marketplace for property funding: scored lender matches, a leads pipeline, in-app chat, Face ID and subscriptions.
+- [GaragePal Auto-Service App and Garage Dashboard](https://nxcsol.com/work/garagepal/): An auto-service marketplace in Canada and Qatar: a driver app to find, book and track garage services, plus a web dashboard for garage owners.
+- [Facility Management Software Case Study](https://nxcsol.com/work/facility-management-system/): A facility management system for the SaudiPak tower: complaints, job slips, tenants, plant-room logs and CCTV for 260+ users across 6 roles.
+- [Karighar Home-Services Booking App UI/UX](https://nxcsol.com/work/karighar/): A home-services app redesign: book verified plumbers and electricians, track them on a live map and pay cash, in a calm light and dark interface.
+- [ZestLead Real Estate Lead Marketplace SaaS](https://nxcsol.com/work/zestlead/): A SaaS marketplace where real estate agents preview, buy and manage property leads, with audio previews, Stripe subscriptions and an admin panel.
+- [Subyect Creative Agency Website (Next.js)](https://nxcsol.com/work/subyect/): A scroll-driven Next.js and Framer Motion website for a DTC static-ad agency, telling its method, its named client results and its in-house ad library.
+
+## Company
+
+- [About](https://nxcsol.com/about/)
+- [Contact and project planner](https://nxcsol.com/contact/)
+- [Kalispell, Montana](https://nxcsol.com/kalispell-montana/)

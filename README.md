@@ -1,80 +1,83 @@
-## Made By Usman Nadeem
+# NXCSOL website
 
-## License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+The website for [nxcsol.com](https://nxcsol.com). NXCSOL LLC is a software development company in Kalispell, Montana, building SaaS platforms, Three.js 3D websites, custom business software, iOS and Android apps, Claude Code skills and 3D renders in Blender.
 
-## Authors
-* Matanza 
-  - https://github.com/Matanza00
+Every page is prerendered HTML, so search engines and slow phones get it straight away. A small set of serverless functions adds the live features: a chat and voice agent, a project planner, a privacy-friendly heatmap and an owner dashboard. There is no framework and no build step to deploy.
 
+This repository began in 2023 as a Create React App site. This version replaced it in November 2026. The old site is still in the history, at commit `dfc0a68`.
 
-# Getting Started with Create React App
+## What's in the site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 11 case studies, under `/work/`
+- 6 service pages, under `/services/`
+- The HRMS product page, at `/products/hrms/`
+- Claude skills, about, contact with the project planner, the Kalispell page, and links
+- A sitemap, `robots.txt`, `llms.txt`, a web manifest and a share image for each page
 
-## Available Scripts
+## Project layout
 
-In the project directory, you can run:
+| Path | What it holds |
+|---|---|
+| `public/` | The site Vercel serves: pages, `assets/` (CSS, JavaScript, fonts), `media/` (case study images and video), `og/` (share images) |
+| `api/` | Vercel functions: `chat`, `lead`, `track`, `admin`, `health` |
+| `lib/` | Shared server code, plus `knowledge.txt` (the facts the agent answers from) and `paths.json` (the pages the heatmap accepts) |
+| `db/schema.sql` | The database tables. Safe to run more than once |
+| `scripts/` | The local server and the database setup script |
 
-### `npm start`
+## Run locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You need Node.js 22.9 or newer.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+npm run dev
+```
 
-### `npm test`
+Open the address the terminal prints. It's http://localhost:3000 unless another app is using that port, in which case the server moves to the next free one. To choose a port yourself, set `PORT`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+No configuration is needed. Without `DATABASE_URL`, the server starts an in-memory database, so anything you record is lost on restart. The dashboard is at `/admin/`, and the terminal prints its local password.
 
-### `npm run build`
+To turn on more features, copy `.env.example` to `.env` and fill in the values below. `.env` is ignored by Git. Never commit real values.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Live features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Feature | Needs | Without it |
+|---|---|---|
+| Chat and voice agent | `ANTHROPIC_API_KEY` | Answers come from the site's own search index |
+| Heatmap, leads, saved chats | `DATABASE_URL` | Nothing is recorded, and the planner still opens WhatsApp |
+| Dashboard at `/admin/` | `DATABASE_URL`, `ADMIN_TOKEN` (at least 24 characters) | Not available |
+| Email for each new brief | `RESEND_API_KEY`, `LEAD_EMAIL` | Briefs stay in the dashboard |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Three optional variables:
 
-### `npm run eject`
+- `CHAT_MODEL` changes the agent's model. The default is `claude-opus-5-5`.
+- `EMAIL_FROM` sets the sender for brief emails.
+- `RATE_SALT` is random text used when hashing visitor addresses for rate limits. Set your own in production.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deploy to Vercel
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Import this repository in Vercel, or run `npx vercel` here. `vercel.json` already sets the output folder and cache headers.
+2. Add the variables above under Settings > Environment Variables.
+3. Create the tables once, using the direct (non-pooled) connection string:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```bash
+   DATABASE_URL=... npm run db:setup
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Set `DATABASE_URL` in Vercel to the pooled connection string.
 
-## Learn More
+## Updating the site
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`public/`, `lib/knowledge.txt` and `lib/paths.json` are generated by a build script that is not in this repository. Change content in the generator, not here, because a hand edit is lost the next time its output is copied in.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To publish a new build, copy the generator's output over this folder and commit it. Keep this README, because the generator writes its own.
 
-### Code Splitting
+## Privacy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The heatmap stores the page, device type, click position and scroll depth. It sets no cookies, stores no IP address and reads no text from the page, and it stays off for visitors who send Global Privacy Control or Do Not Track.
 
-### Analyzing the Bundle Size
+Chats and briefs are stored, and the chat panel says so. Rate limits keep only a salted hash of the visitor's address, for a day. Voice input uses the browser's own speech service.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Author
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made by [Usman Nadeem](https://github.com/Matanza00). Questions: hello@nxcsol.com.
