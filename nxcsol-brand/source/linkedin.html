@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NXCSOL LinkedIn assets</title>
+<!-- One template, four LinkedIn assets, chosen with ?k= : logo (400x400), icon (400x400), cover (1128x191, company page),
+     banner (1584x396, personal profile). render-linkedin.mjs embeds the fonts and captures each at 2x. -->
+<style>
+/*FONTS*/
+:root { --bg: #07090e; --ink: #eef2fa; --ink-2: #a8b2c7; --mute: #808aa2; --blue: #3d7efc; --blue-2: #8fb3ff; --line: rgba(150, 175, 230, .16); }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); }
+.art { position: relative; overflow: hidden; background: var(--bg); color: var(--ink); font-family: "Geist", system-ui, sans-serif; }
+.dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(143, 179, 255, .13) 1px, transparent 1.2px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(80% 120% at 70% 50%, #000 30%, transparent 85%); mask-image: radial-gradient(80% 120% at 70% 50%, #000 30%, transparent 85%); }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); background: radial-gradient(closest-side, rgba(61, 126, 252, .32), rgba(61, 126, 252, 0)); }
+.slashes { position: absolute; display: flex; gap: var(--g, 26px); transform: skewX(-21deg); }
+.slashes i { display: block; width: var(--w, 18px); border-radius: 99px; background: linear-gradient(180deg, rgba(61, 126, 252, .0), rgba(61, 126, 252, var(--a, .35)) 50%, rgba(61, 126, 252, 0)); }
+.mark { display: inline-flex; align-items: center; gap: .14em; font: 700 var(--fs, 60px) / 1 "Saira Semi Condensed", sans-serif; letter-spacing: .02em; color: var(--ink); }
+.mark i { display: block; width: .2em; height: 1.02em; border-radius: 99px; background: var(--blue); transform: skewX(-21deg); margin: 0 .16em 0 .2em; box-shadow: 0 0 .5em rgba(61, 126, 252, .45); }
+.mark .sol { color: var(--blue); }
+.mono { font-family: "Geist Mono", ui-monospace, monospace; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chips span { padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line); background: rgba(15, 20, 33, .7); font-size: 15px; font-weight: 500; color: var(--ink); }
+.chips span b { color: var(--blue-2); font-weight: 600; margin-right: 6px; }
+
+/* logo and icon: square */
+.sq { width: 400px; height: 400px; display: grid; place-items: center; background: radial-gradient(70% 70% at 50% 42%, #111a2d, var(--bg) 72%); }
+.sq .dots { -webkit-mask-image: radial-gradient(closest-side, #000 20%, transparent 90%); mask-image: radial-gradient(closest-side, #000 20%, transparent 90%); }
+.sq .mark { --fs: 70px; position: relative; top: -8px; }
+.sq .sub { position: absolute; bottom: 108px; left: 0; right: 0; text-align: center; font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: var(--mute); }
+.icon .slash { position: relative; width: 74px; height: 250px; border-radius: 99px; background: linear-gradient(180deg, #5a92ff, var(--blue) 45%, #2b62d9); transform: skewX(-21deg); box-shadow: 0 0 60px rgba(61, 126, 252, .5); }
+
+/* company cover 1128x191: LinkedIn puts the logo over the lower left, so the left third stays calm */
+.cover { width: 1128px; height: 191px; }
+.cover .in { position: absolute; left: 340px; right: 40px; top: 0; bottom: 0; display: flex; align-items: center; gap: 30px; }
+.cover .mark { --fs: 52px; flex: none; }
+.cover .div { width: 1px; height: 86px; background: var(--line); flex: none; }
+.cover h2 { margin: 0 0 8px; font: 600 19px/1.25 "Geist", sans-serif; color: var(--ink); letter-spacing: -.005em; white-space: nowrap; }
+.cover p { margin: 0; font-size: 13.5px; color: var(--ink-2); }
+.cover .url { margin-top: 10px; font-size: 12px; color: var(--blue-2); letter-spacing: .04em; }
+
+/* personal banner 1584x396: the profile photo covers the lower left, so content sits centre-right */
+.banner { width: 1584px; height: 396px; }
+.banner .in { position: absolute; left: 520px; right: 80px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.banner .kicker { font-size: 14px; color: var(--blue-2); letter-spacing: .06em; }
+.banner .mark { --fs: 84px; }
+.banner h2 { margin: 0; font: 600 27px/1.25 "Geist", sans-serif; letter-spacing: -.01em; max-width: 860px; }
+.banner h2 em { font-style: normal; color: var(--blue-2); }
+.banner .foot { display: flex; gap: 22px; font-size: 14px; color: var(--mute); }
+.banner .foot b { color: var(--ink); font-weight: 500; }
+/* a faint build log in the background: the paper-to-product story */
+.log { position: absolute; font-size: 12.5px; line-height: 1.9; color: rgba(143, 179, 255, .16); white-space: pre; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+const k = new URLSearchParams(location.search).get("k") || window.K || "logo";
+const MARK = `<span class="mark"><span>NXC</span><i></i><span class="sol">SOL</span></span>`;
+const slashes = (n, h, w, g, a, style) => `<div class="slashes" style="--w:${w}px;--g:${g}px;${style}">${Array.from({ length: n }, (_, i) => `<i style="height:${h}px;--a:${(a * (1 - i * 0.18)).toFixed(2)}"></i>`).join("")}</div>`;
+const LOG = "$ sketch db --tables users,projects,invoices\n✓ wireframes: 14 screens\n✓ prototype: clickable\n$ connect --api --auth --payments\n✓ build  ✓ tests  ✓ deploy\n● live";
+const html = {
+  logo: `<div class="art sq"><div class="dots"></div>${MARK}<div class="sub">software development</div></div>`,
+  icon: `<div class="art sq icon"><div class="dots"></div><div class="slash"></div></div>`,
+  cover: `<div class="art cover"><div class="dots"></div><div class="glow" style="width:620px;height:420px;right:-60px;top:-120px"></div>
+    ${slashes(4, 260, 16, 30, 0.32, "right:70px;top:-36px")}
+    <div class="in">${MARK}<div class="div"></div><div><h2>SaaS · 3D web · Custom software · Mobile apps</h2><p>From a paper sketch to a shipped product, one team end to end.</p><div class="url mono">nxcsol.com · Kalispell, Montana</div></div></div></div>`,
+  banner: `<div class="art banner"><div class="dots"></div><div class="glow" style="width:900px;height:640px;right:-140px;top:-170px"></div>
+    ${slashes(5, 520, 22, 40, 0.3, "right:60px;top:-62px")}<div class="log mono" style="left:110px;top:52px">${LOG}</div>
+    <div class="in"><div class="kicker mono">~/nxcsol · software development company</div>${MARK}
+      <h2>We design and build <em>SaaS platforms, 3D websites, custom software</em> and <em>iOS &amp; Android apps</em>, from first sketch to launch.</h2>
+      <div class="foot mono"><span><b>nxcsol.com</b></span><span>hello@nxcsol.com</span><span>Kalispell, Montana · USA</span></div></div></div>`,
+}[k];
+document.getElementById("out").innerHTML = html;
+</script>
+</body>
+</html>
