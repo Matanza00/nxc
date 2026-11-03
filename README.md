@@ -20,6 +20,7 @@ This repository began in 2023 as a Create React App site. This version replaced 
 |---|---|
 | `public/` | The site Vercel serves: pages, `assets/` (CSS, JavaScript, fonts), `media/` (case study images and video), `og/` (share images) |
 | `api/` | Vercel functions: `chat`, `lead`, `track`, `admin`, `health` |
+| `edge/` | The Cloudflare Worker: `chat`, `lead`, `health` |
 | `lib/` | Shared server code, plus `knowledge.txt` (the facts the agent answers from) and `paths.json` (the pages the heatmap accepts) |
 | `db/schema.sql` | The database tables. Safe to run more than once |
 | `scripts/` | The local server and the database setup script |
@@ -57,7 +58,15 @@ Three optional variables:
 - `EMAIL_FROM` sets the sender for brief emails.
 - `RATE_SALT` is random text used when hashing visitor addresses for rate limits. Set your own in production.
 
-## Deploy to Vercel
+## Deploy to Cloudflare (production)
+
+`nxcsol.com` runs on Cloudflare Workers and deploys on every push to `master`. `wrangler.jsonc` serves `public/` as static files and sends only `/api/*` to `edge/worker.js`.
+
+Add these under Settings > Variables and Secrets on the Worker: `GEMINI_API_KEY`, `RESEND_API_KEY` and optionally `LEAD_EMAIL`, which defaults to `hello@nxcsol.com`. The Worker runs the chat agent on Gemini and sends briefs by email. The heatmap, saved leads and the dashboard need a database, so they only run on Vercel.
+
+To check a deployment, open `/api/health`. `agent` and `lead` show whether the keys are in place.
+
+## Deploy to Vercel (staging)
 
 1. Import this repository in Vercel, or run `npx vercel` here. `vercel.json` already sets the output folder and cache headers.
 2. Add the variables above under Settings > Environment Variables.
