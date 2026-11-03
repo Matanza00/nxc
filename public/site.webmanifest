@@ -1,7 +1,7 @@
 {
  "name": "NXCSOL",
  "short_name": "NXCSOL",
- "description": "NXCSOL is a software development company in Kalispell, Montana that builds SaaS platforms, Three.js 3D websites, custom software, mobile apps and Claude skills.",
+ "description": "NXCSOL is a software development company in Kalispell, Montana building SaaS platforms, Three.js 3D websites, custom software, mobile apps and AI automation.",
  "start_url": "/",
  "display": "standalone",
  "background_color": "#07090e",

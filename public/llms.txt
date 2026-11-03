@@ -1,6 +1,6 @@
 # NXCSOL
 
-> Software development company in Kalispell, Montana building SaaS platforms, Three.js 3D websites, custom business software and iOS and Android apps.
+> Software development company in Kalispell, Montana building SaaS platforms, Three.js 3D websites, custom business software, AI automation and iOS and Android apps.
 
 NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcsol.com, phone +1 (209) 807-4007, WhatsApp +1 (406) 300-5434. Founder: Usman Nadeem.
 
@@ -9,6 +9,7 @@ NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcs
 - [SaaS platforms](https://nxcsol.com/services/saas-development/): NXCSOL builds SaaS platforms and MVPs: sign-up, Stripe billing, role-based dashboards, admin panels and AI analytics on Next.js, Node.js and PostgreSQL.
 - [Three.js and 3D web](https://nxcsol.com/services/threejs-3d-web-development/): Three.js development services: 3D product viewers and configurators, scroll-driven film and WebGL particle scenes that still load fast on phones.
 - [Custom software](https://nxcsol.com/services/custom-software-development/): Custom software for operations: fleet and facility management systems, admin panels, CRMs and dashboards, built around how your business actually runs.
+- [AI and workflow automation](https://nxcsol.com/services/ai-workflow-automation/): AI and workflow automation services: n8n and Make workflows, email automation, LinkedIn and YouTube content pipelines, and custom bots for your business.
 - [Mobile apps](https://nxcsol.com/services/mobile-app-development/): iOS and Android app development with React Native and Expo: sign-in, payments, chat, maps and live tracking, plus the backend and App Store releases.
 - [Claude skills](https://nxcsol.com/services/claude-skills-development/): NXCSOL writes custom Claude Code skills and plugins around your team's process, with eval cases, versioned releases and clear limits on what each skill can do.
 - [3D rendering and Blender](https://nxcsol.com/services/3d-rendering-blender/): 3D rendering in Blender from NXCSOL: product stills and turntables, short animation, and optimised glTF models ready for Three.js websites.

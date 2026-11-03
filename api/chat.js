@@ -5,7 +5,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import { query, hasDb } from "../lib/db.js";
 import { allow, clientKey, readJson, route, send } from "../lib/http.js";
 
-const MODEL = process.env.CHAT_MODEL || "claude-opus-5-5";
+const GEMINI = Boolean(process.env.GEMINI_API_KEY);
+const MODEL = process.env.CHAT_MODEL || (GEMINI ? "gemini-3.5-flash-lite" : "claude-opus-5-5");
 const MAX_TURNS = 12, MAX_CHARS = 800;
 const KNOWLEDGE = fs.readFileSync(new URL("../lib/knowledge.txt", import.meta.url), "utf8");
 const SYSTEM = `You are the NXCSOL agent, on the NXCSOL website. NXCSOL is a small software development company in Kalispell, Montana.
@@ -27,14 +28,35 @@ const clean = (list) => {
   return msgs.length && msgs.at(-1).role === "user" ? msgs : null;
 };
 
+/** Streams a Gemini answer as plain text. Throws with .status when the API refuses the request. */
+async function* streamGemini(messages) {
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:streamGenerateContent?alt=sse`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-goog-api-key": process.env.GEMINI_API_KEY },
+    body: JSON.stringify({ systemInstruction: { parts: [{ text: SYSTEM }] }, contents: messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] })), generationConfig: { maxOutputTokens: 2000 } }),
+  });
+  if (!r.ok || !r.body) throw Object.assign(new Error("gemini"), { status: r.status });
+  const decoder = new TextDecoder();
+  let buffer = "";
+  for await (const chunk of r.body) {
+    buffer += decoder.decode(chunk, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (!line.startsWith("data:")) continue;
+      const parts = JSON.parse(line.slice(5)).candidates?.[0]?.content?.parts || [];
+      for (const p of parts) if (p.text && !p.thought) yield p.text;
+    }
+  }
+}
+
 export default route(["POST"], async (req, res) => {
-  if (!process.env.ANTHROPIC_API_KEY) return send(res, 503, { error: "The agent is not set up yet." });
+  if (!GEMINI && !process.env.ANTHROPIC_API_KEY) return send(res, 503, { error: "The agent is not set up yet." });
   const body = await readJson(req), messages = clean(body.messages);
   if (!messages) return send(res, 400, { error: "Send a question." });
-  if (hasDb() && !(await allow("chat:" + clientKey(req), 30, 60))) return send(res, 429, { error: "That is a lot of questions for one hour. Please message the team on the contact page." });
+  if (!(await allow("chat:" + clientKey(req), 30, 60))) return send(res, 429, { error: "That is a lot of questions for one hour. Please message the team on the contact page." });
 
   const session = /^[a-f0-9-]{36}$/.test(body.session || "") ? body.session : crypto.randomUUID();
-  const client = new Anthropic();
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
@@ -42,22 +64,28 @@ export default route(["POST"], async (req, res) => {
 
   let answer = "";
   try {
-    const stream = client.beta.messages.stream({
-      model: MODEL,
-      max_tokens: 2000,
-      output_config: { effort: "low" },
-      system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
-      messages,
-      ...(MODEL.startsWith("claude-opus-5") ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}),
-    });
-    for await (const event of stream) {
-      if (event.type === "content_block_delta" && event.delta.type === "text_delta") { answer += event.delta.text; res.write(event.delta.text); }
+    let refused = false;
+    if (GEMINI) {
+      for await (const text of streamGemini(messages)) { answer += text; res.write(text); }
+      refused = !answer;   // a blocked prompt or answer arrives with no text
+    } else {
+      const stream = new Anthropic().beta.messages.stream({
+        model: MODEL,
+        max_tokens: 2000,
+        output_config: { effort: "low" },
+        system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
+        messages,
+        ...(MODEL.startsWith("claude-opus-5") ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}),
+      });
+      for await (const event of stream) {
+        if (event.type === "content_block_delta" && event.delta.type === "text_delta") { answer += event.delta.text; res.write(event.delta.text); }
+      }
+      refused = (await stream.finalMessage()).stop_reason === "refusal" && !answer;
     }
-    const final = await stream.finalMessage();
-    if (final.stop_reason === "refusal" && !answer) { answer = "I can't help with that here, but the team can: [contact us](/contact/)."; res.write(answer); }
+    if (refused) { answer = "I can't help with that here, but the team can: [contact us](/contact/)."; res.write(answer); }
   } catch (e) {
     console.error("chat error", e.status || e.name);
-    const msg = e instanceof Anthropic.RateLimitError ? "The agent is busy. Please try again in a minute." : "The agent could not answer just now. You can reach the team on [the contact page](/contact/).";
+    const msg = e.status === 429 ? "The agent is busy. Please try again in a minute." : "The agent could not answer just now. You can reach the team on [the contact page](/contact/).";
     if (!answer) res.write(msg);
   }
   res.end();
