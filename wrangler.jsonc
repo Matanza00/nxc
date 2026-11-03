@@ -1,4 +1,4 @@
-// Cloudflare Worker for nxcsol.com. Pages come straight from public/, and only /api/* runs edge/worker.js.
+// Cloudflare Worker for nxcsol.com. Real files come straight from public/, and every other path runs edge/worker.js.
 {
   "name": "nxc",
   "compatibility_date": "2026-11-03",
@@ -8,8 +8,6 @@
   "rules": [{ "type": "Text", "globs": ["**/*.txt"], "fallthrough": true }],
   "assets": {
     "directory": "public",
-    "binding": "ASSETS",
-    "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]
+    "binding": "ASSETS"
   }
 }

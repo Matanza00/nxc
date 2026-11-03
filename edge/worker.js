@@ -1,4 +1,4 @@
-// Cloudflare Worker for nxcsol.com. Cloudflare serves public/ itself, and only /api/* reaches this code.
+// Cloudflare Worker for nxcsol.com. Cloudflare serves files from public/ itself, and only other paths reach this code.
 // It covers the agent and email-only briefs. The heatmap and dashboard need a database, which runs on Vercel.
 import KNOWLEDGE from "../lib/knowledge.txt";
 import { CHAT_REFUSED, GEMINI_MODEL, LEAD_FAILED, LEAD_INVALID, LEAD_LIMIT, LEAD_OFF, chatFailure, chatSystem, cleanMessages, emailBrief, parseLead, streamGemini } from "../lib/shared.js";
@@ -72,6 +72,9 @@ export default {
       console.error("api error", pathname, e.name);
       return json(500, { error: "Something went wrong. Please email hello@nxcsol.com." });
     }
-    return pathname.startsWith("/api/") ? json(404, {}) : env.ASSETS.fetch(request);
+    if (pathname.startsWith("/api/")) return json(404, {});
+    // Cloudflare serves real files before this code runs, so anything else that gets here does not exist
+    const page = await env.ASSETS.fetch(new URL("/404", request.url));
+    return new Response(page.body, { status: 404, headers: page.headers });
   },
 };
