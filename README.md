@@ -11,6 +11,7 @@ This repository began in 2023 as a Create React App site. This version replaced 
 - 11 case studies, under `/work/`
 - 7 service pages, under `/services/`, including AI and workflow automation
 - The HRMS product page, at `/products/hrms/`
+- 6 guides and tutorials, plus videos, under `/guides/`
 - Claude skills, about, contact with the project planner, the Kalispell page, and links
 - A sitemap, `robots.txt`, `llms.txt`, a web manifest and a share image for each page
 

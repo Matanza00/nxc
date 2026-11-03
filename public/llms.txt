@@ -28,6 +28,15 @@ NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcs
 - [ZestLead Real Estate Lead Marketplace SaaS](https://nxcsol.com/work/zestlead/): A SaaS marketplace where real estate agents preview, buy and manage property leads, with audio previews, Stripe subscriptions and an admin panel.
 - [Subyect Creative Agency Website (Next.js)](https://nxcsol.com/work/subyect/): A scroll-driven Next.js and Framer Motion website for a DTC static-ad agency, telling its method, its named client results and its in-house ad library.
 
+## Guides and tutorials
+
+- [How to Build a 3D Product Viewer with Three.js](https://nxcsol.com/guides/threejs-3d-product-viewer/): A step-by-step Three.js tutorial with working code: a 3D product viewer that turns on drag, scrolls properly on phones and falls back to an image.
+- [How to Keep a 3D Website Fast on Phones](https://nxcsol.com/guides/fast-3d-websites-on-phones/): What we learned building Three.js sites that run on phones: when to load 3D, what to cap, and the one-line scroll bug that cost us over a second.
+- [How to Export a Blender Model for the Web (glTF)](https://nxcsol.com/guides/blender-gltf-for-web/): How to get a Blender model onto a website: clean it up, bake procedural materials, export it as glTF, then shrink the file with one command.
+- [n8n vs Make vs Zapier: Which Should You Use?](https://nxcsol.com/guides/n8n-vs-make-vs-zapier/): How n8n, Make and Zapier really differ: how each one bills, what a five-step workflow costs in usage, and when you need custom code instead.
+- [n8n Tutorial: Automatic Lead Follow-Up by Email](https://nxcsol.com/guides/n8n-lead-follow-up-tutorial/): Build an n8n workflow that catches a form submission, alerts your team and emails the lead straight away. Steps, test commands and what to do next.
+- [LinkedIn and YouTube Automation: What Is Allowed](https://nxcsol.com/guides/linkedin-youtube-automation-rules/): What LinkedIn and YouTube's own rules say about automation, what can get an account restricted or demonetized, and what is safe for creators to automate.
+
 ## Company
 
 - [About](https://nxcsol.com/about/)

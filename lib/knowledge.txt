@@ -58,6 +58,14 @@ Case studies:
   Stack: Next.js and React: Fast page loads and clean search results for an agency selling to sceptical buyers. Framer Motion: Reveals pace the argument section by section without slowing the page. Tailwind CSS: Quick, consistent responsive layouts for every section.
   Benefits: The method is explained in seconds, as six visible decisions. Proof comes first: 100+ brands, 30K+ ads and €20M+ tracked client revenue. The in-house Obyect library is finally visible as an advantage. Cost: A clear page answers early questions, so sales calls start further along. One Next.js codebase is simple and cheap to host and update.
 
+Guides and tutorials (/guides/):
+- How to Build a 3D Product Viewer with Three.js (/guides/threejs-3d-product-viewer/): A step-by-step Three.js tutorial with working code: a 3D product viewer that turns on drag, scrolls properly on phones and falls back to an image.
+- How to Keep a 3D Website Fast on Phones (/guides/fast-3d-websites-on-phones/): What we learned building Three.js sites that run on phones: when to load 3D, what to cap, and the one-line scroll bug that cost us over a second.
+- How to Export a Blender Model for the Web (glTF) (/guides/blender-gltf-for-web/): How to get a Blender model onto a website: clean it up, bake procedural materials, export it as glTF, then shrink the file with one command.
+- n8n vs Make vs Zapier: Which Should You Use? (/guides/n8n-vs-make-vs-zapier/): How n8n, Make and Zapier really differ: how each one bills, what a five-step workflow costs in usage, and when you need custom code instead.
+- n8n Tutorial: Automatic Lead Follow-Up by Email (/guides/n8n-lead-follow-up-tutorial/): Build an n8n workflow that catches a form submission, alerts your team and emails the lead straight away. Steps, test commands and what to do next.
+- LinkedIn and YouTube Automation: What Is Allowed (/guides/linkedin-youtube-automation-rules/): What LinkedIn and YouTube's own rules say about automation, what can get an account restricted or demonetized, and what is safe for creators to automate.
+
 Companies we have worked with:
 - Legit Design Studio (LDS): Production SaaS and app products including Obyect, Subyect and the iFund app, with role-based dashboards and AI-assisted analytics.
 - Nexifies: Three production SaaS applications: GaragePal in Canada, ZestLead for US real estate, and HalalLife.
