@@ -39,6 +39,7 @@ NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcs
 
 ## Company
 
+- [All services](https://nxcsol.com/services/)
 - [About](https://nxcsol.com/about/)
 - [Contact and project planner](https://nxcsol.com/contact/)
 - [Kalispell, Montana](https://nxcsol.com/kalispell-montana/)

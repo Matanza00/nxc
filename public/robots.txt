@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /links/
 Disallow: /admin/
 
 Sitemap: https://nxcsol.com/sitemap.xml
