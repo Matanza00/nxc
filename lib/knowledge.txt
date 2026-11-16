@@ -12,6 +12,12 @@ Services:
 
 HRMS (/products/hrms/): Attendance, leave, payroll and company accounts in one workspace, for teams of up to 70 people. Pricing is flat per team: $10/month for up to 10 people, $20/month for up to 25 people, $50/month for up to 70 people. Above 70 people, talk to the team.
 
+Our own products:
+- HRMS (/products/hrms/): Attendance, leave, payroll and company accounts in one workspace, for teams of up to 70 people.
+- Fleet Management System (/work/fleet-management-system/): Live tracking, drivers, fuel, maintenance, insurance and emergency jobs in one platform, with role-based access from regional heads down to drivers. Runs a national fleet of 580+ vehicles across 12+ cities.
+- Facility Management System (/work/facility-management-system/): Complaints, job slips, tenants and occupancy, plant-room logs, janitorial duty, security and CCTV, with role-based access. Used by 260+ people across 6 roles in a commercial tower.
+- Claude skills (/claude-skills/): The Claude Code skills NXCSOL has built, starting with system-arch, which turns a one-line product idea into a researched system architecture.
+
 Our Claude skills (/claude-skills/):
 - /principal:system-arch (Built): Turns a one-line product idea into a researched system architecture you can defend in a review.
 - /principal:ui-upgrade (Planned): Will finish or upgrade an existing app's UI without ignoring the design system it already has.
