@@ -7,6 +7,7 @@ NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcs
 ## Services
 
 - [SaaS platforms](https://nxcsol.com/services/saas-development/): NXCSOL builds SaaS platforms and MVPs: sign-up, Stripe billing, role-based dashboards, admin panels and AI analytics on Next.js, Node.js and PostgreSQL.
+- [Microsoft Dynamics 365](https://nxcsol.com/services/microsoft-dynamics-365/): Microsoft Dynamics 365 implementation, customisation and support from NXCSOL, with functional and technical consultants on one team.
 - [Three.js and 3D web](https://nxcsol.com/services/threejs-3d-web-development/): Three.js development services: 3D product viewers and configurators, scroll-driven film and WebGL particle scenes that still load fast on phones.
 - [Custom software](https://nxcsol.com/services/custom-software-development/): Custom software for operations: fleet and facility management systems, admin panels, CRMs and dashboards, built around how your business actually runs.
 - [AI and workflow automation](https://nxcsol.com/services/ai-workflow-automation/): AI and workflow automation services: n8n and Make workflows, email automation, LinkedIn and YouTube content pipelines, and custom bots for your business.
