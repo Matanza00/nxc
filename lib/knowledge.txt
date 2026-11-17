@@ -14,6 +14,7 @@ HRMS (/products/hrms/): Attendance, leave, payroll and company accounts in one w
 
 Our own products:
 - HRMS (/products/hrms/): Attendance, leave, payroll and company accounts in one workspace, for teams of up to 70 people.
+- FirstPass (/products/firstpass/): Checks an Android app against Google Play's rules before you submit, with a fix prompt for every problem. Free in beta at fp.nxcsol.com.
 - Fleet Management System (/work/fleet-management-system/): Live tracking, drivers, fuel, maintenance, insurance and emergency jobs in one platform, with role-based access from regional heads down to drivers. Runs a national fleet of 580+ vehicles across 12+ cities.
 - Facility Management System (/work/facility-management-system/): Complaints, job slips, tenants and occupancy, plant-room logs, janitorial duty, security and CCTV, with role-based access. Used by 260+ people across 6 roles in a commercial tower.
 - Claude skills (/claude-skills/): The Claude Code skills NXCSOL has built, starting with system-arch, which turns a one-line product idea into a researched system architecture.

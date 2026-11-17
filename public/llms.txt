@@ -29,6 +29,11 @@ NXCSOL LLC, 1001 S. Main St. Ste 600, Kalispell, MT 59901, USA. Email hello@nxcs
 - [ZestLead Real Estate Lead Marketplace SaaS](https://nxcsol.com/work/zestlead/): A SaaS marketplace where real estate agents preview, buy and manage property leads, with audio previews, Stripe subscriptions and an admin panel.
 - [Subyect Creative Agency Website (Next.js)](https://nxcsol.com/work/subyect/): A scroll-driven Next.js and Framer Motion website for a DTC static-ad agency, telling its method, its named client results and its in-house ad library.
 
+## Products
+
+- [HRMS](https://nxcsol.com/products/hrms/): attendance, leave, payroll and accounts for small teams.
+- [FirstPass](https://nxcsol.com/products/firstpass/): a free checker that finds every Google Play review problem in an Android app before you submit, with a fix prompt for each. Live at https://fp.nxcsol.com
+
 ## Guides and tutorials
 
 - [How to Build a 3D Product Viewer with Three.js](https://nxcsol.com/guides/threejs-3d-product-viewer/): A step-by-step Three.js tutorial with working code: a 3D product viewer that turns on drag, scrolls properly on phones and falls back to an image.
