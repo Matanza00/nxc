@@ -44,6 +44,7 @@ How a project runs:
 - Support: Fixes, new features and performance work after launch, from the same people who built it.
 
 Questions:
+- Can you work white-label, under NDA? Yes. We sign an NDA before you share anything, and we can build and ship under your brand. We already do this for Silicon Valley software houses, which is why some of our best work is not in our case studies.
 - What does NXCSOL build? SaaS platforms, Three.js and interactive 3D websites, custom business software, iOS and Android apps, Claude Code skills, AI and workflow automation, and 3D rendering in Blender. Most projects combine two, for example a mobile app with the admin dashboard behind it. We also sell our own HRMS.
 - How does a project start? With a call about what you want to build and why. We follow up with a written scope, a timeline and an estimate. Use the project planner on this page to send us the basics first.
 - Can you take over an existing product? Yes. We start with a code and infrastructure review, fix what is risky, and then carry on shipping features.
